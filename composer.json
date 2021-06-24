@@ -1,0 +1,21 @@
+{
+  "name":"code-a1/phpgraph",
+  "description": "A simple and immediate object-oriented library for the official Telegraph API",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "code-a1"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "codea1\\PHPGraph\\": "scr/PHPGraph",
+      "codea1\\Telegraph\\": "scr/Telegraph"
+    }
+  },
+  "require": {
+    "skrtdev/json2": "dev-master",
+    "ext-json": "*",
+    "ext-curl": "*"
+  }
+}
