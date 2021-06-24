@@ -8,7 +8,7 @@ You can easily install PHPGraph with composer, running the following command:
 
 
 ```bash
-composer require code-a1/phpgraph
+composer require code-a1/phpgraph dev-main
 ```
 Then you must only require the autoload file in your project, for example:
 
