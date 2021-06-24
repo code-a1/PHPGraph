@@ -42,3 +42,11 @@ echo $page->edit("Wow, the title is changed!")->url;
 - All the methods of the ***official Telegraph api***.
 - ***Aliases*** for some objects.
 - Methods such as createPage and editPage ***simplified*** (for example in ```$client->createPage("Test", "Text to test")```, you don't have to write all the long and complex "content" field for a simple text such as "Text to test"
+- You can use ***every time a different account***, for example:
+  ```php
+  $account = $client->createAccount("Test");
+
+  $client->setAccount($account);
+  ```
+- Library ***Object-Oriented***
+- All proprety and methods have their ***PHPDoc*** comment
