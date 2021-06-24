@@ -9,7 +9,7 @@
     }
   },
   "require": {
-    "skrtdev/json2": "dev-master",
+    "skrtdev/json2": "*",
     "ext-json": "*",
     "ext-curl": "*"
   }
