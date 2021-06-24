@@ -4,8 +4,8 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "codea1\\PHPGraph\\": "scr/PHPGraph",
-      "codea1\\Telegraph\\": "scr/Telegraph"
+      "codea1\\PHPGraph\\": "src/PHPGraph",
+      "codea1\\Telegraph\\": "src/Telegraph"
     }
   },
   "require": {
