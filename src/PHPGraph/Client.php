@@ -5,7 +5,6 @@ namespace codea1\PHPGraph;
 
 use codea1\Telegraph\Account;
 use Exception;
-use codea1\Telegraph;
 
 class Client
 {
@@ -47,16 +46,18 @@ class Client
      * Makes a request to the API, specifying the method and the data.
      * On error returns an exception with the error.
      *
-     * @param array $data
      * @param string $method
-     * @throws Exception
-     *
+     * @param array $data
+     * @param null $class
+     * @return object|array
+     * @throws \skrtdev\JSON2\Exception
      */
-    public function request(string $method, array $data){
+    public function request(string $method, array $data, $class = null): object|array
+    {
         $response = Utils::curl("https://api.telegra.ph/".$method, $data);
         $decoded = json_decode($response, true);
         if($decoded["ok"] !== true) throw new Exception("There was an API error: ".$decoded["error"]);
-        return $decoded["result"];
+        return isset($class) ? json2_decode($decoded["result"], $class, client:$this) : $decoded["result"];
     }
 }
 

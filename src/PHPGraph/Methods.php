@@ -16,7 +16,6 @@ trait Methods
      * @param string $short_name
      * @param array|null $args
      * @return Telegraph\Account
-     * @throws Exception
      */
     public function createAccount(string $short_name, array $args = null): Telegraph\Account
     {
@@ -24,7 +23,7 @@ trait Methods
           "short_name" => $short_name,
         ] + ($args ?? []);
 
-        return json2_decode($this->request("createAccount", $data), Telegraph\Account::class, client : $this);
+        return $this->request("createAccount", $data, Telegraph\Account::class);
     }
 
     /**
@@ -35,12 +34,11 @@ trait Methods
      * @param array|string $content
      * @param array $args
      * @return Telegraph\Page
-     * @throws Exception
      */
     public function createPage(string $title, array|string $content, array $args = []): Telegraph\Page
     {
 
-        $content = (is_string($content)) ? [["tag"=>"p","children" => [$content]]] : $content;
+        $content = is_string($content) ? [["tag"=>"p","children" => [$content]]] : $content;
 
         $args["autor_name"] ??= $this->autor_name ?? [];
 
@@ -51,7 +49,7 @@ trait Methods
 
         $data["access_token"] ??= $this->access_token;
 
-        return json2_decode($this->request("createPage", $data), Telegraph\Page::class, client : $this);
+        return $this->request("createPage", $data, Telegraph\Page::class);
     }
 
     /**
@@ -60,7 +58,6 @@ trait Methods
      *
      * @param array|null $args
      * @return Telegraph\Account
-     * @throws Exception
      */
 
     public function editAccountInfo(?array $args): Telegraph\Account
@@ -68,7 +65,7 @@ trait Methods
 
         $args["access_token"] ??= $this->access_token;
 
-        return json2_decode($this->request("editAccountInfo", $args), Telegraph\Account::class, client : $this);
+        return $this->request("editAccountInfo", $args, Telegraph\Account::class);
     }
 
 
@@ -102,7 +99,7 @@ trait Methods
      */
     public function editPage(string $path, string $title, array|string $content, array $args = []): Telegraph\Page
     {
-        $content = (is_string($content)) ? [["tag"=>"p","children" => [$content]]] : $content;
+        $content = is_string($content) ? [["tag"=>"p","children" => [$content]]] : $content;
 
         $data = [
                 "path" => $path,
@@ -112,7 +109,7 @@ trait Methods
 
         $data["access_token"] ??= $this->access_token;
 
-        return json2_decode($this->request("editPage", $data), Telegraph\Page::class, client : $this);
+        return $this->request("editPage", $data, Telegraph\Page::class);
     }
 
     /**
@@ -122,7 +119,6 @@ trait Methods
      * @param string $path
      * @param array $args
      * @return Telegraph\Page
-     * @throws Exception
      */
     public function getPage(string $path, array $args = []): Telegraph\Page
     {
@@ -130,7 +126,7 @@ trait Methods
             "path" => $path,
         ]+ ($args);
 
-        return json2_decode($this->request("getPage", $data), Telegraph\Page::class, client : $this);
+        return $this->request("getPage", $data, Telegraph\Page::class);
     }
 
     /**
@@ -139,13 +135,12 @@ trait Methods
      *
      * @param array $args
      * @return Telegraph\PageList
-     * @throws Exception
      */
     public function getPageList(array $args = []): Telegraph\PageList
     {
         $args["access_token"] ??= $this->access_token;
 
-        return json2_decode($this->request("getPageList", $args), Telegraph\PageList::class, client : $this);
+        return $this->request("getPageList", $args, Telegraph\PageList::class);
     }
 
     /**
@@ -155,7 +150,6 @@ trait Methods
      * @param string $path
      * @param array $args
      * @return Telegraph\PageViews
-     * @throws Exception
      */
     public function getViews(string $path, array $args = []): Telegraph\PageViews
     {
@@ -164,7 +158,7 @@ trait Methods
 
         $data["access_token"] ??= $this->access_token;
 
-        return json2_decode($this->request("getViews", $data), Telegraph\PageViews::class, client : $this);
+        return $this->request("getViews", $data, Telegraph\PageViews::class);
     }
 
     /**
@@ -181,6 +175,6 @@ trait Methods
 
         $data = ["path" => $access_token,];
 
-        return json2_decode($this->request("revokeAccessToken", $data), Telegraph\Account::class, client : $this);
+        return $this->request("revokeAccessToken", $data, Telegraph\Account::class);
     }
 }
