@@ -9,6 +9,8 @@
     }
   },
   "require": {
-    "skrtdev/json2": "*"
+    "skrtdev/json2": "dev-master",
+    "php": ">=8",
+    "ext-curl": "*"
   }
 }
