@@ -177,4 +177,20 @@ trait Methods
 
         return $this->request("revokeAccessToken", $data, Telegraph\Account::class);
     }
+    
+    /**
+     * Use this method to upload images or videos on telegraph (the maximum size is 5 MB, only .jpg, .jpeg, .png, .gif, .mp4 files are allowed).
+     * Returns the file's url string
+     *
+     * @param \CURLFile $file
+     * @return string
+     * @throws Exception
+     */
+    public function fileUpload(\CURLFile $file)
+    {
+        $response = json_decode(Utils::curl('https://telegra.ph/upload', ["file" => $file]), true);
+        if(!isset($response[0]["src"])) throw new Exception("There was an API error: ".$response[0]["error"]);
+
+        return 'https://telegra.ph'.$response[0]['src'];
+    }
 }
