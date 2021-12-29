@@ -27,7 +27,7 @@ class Utils
 
         if(!empty($data)){
             $settings += [
-                CURLOPT_POSTFIELDS => http_build_query($data)
+                CURLOPT_POSTFIELDS => $data
             ];
         }
 
