@@ -54,7 +54,7 @@ class Client
      */
     public function request(string $method, array $data, $class = null): object|array
     {
-        $response = Utils::curl("https://api.telegra.ph/".$method, $data);
+        $response = Utils::curl("https://api.telegra.ph/".$method, http_build_query($data));
         $decoded = json_decode($response, true);
         if($decoded["ok"] !== true) throw new Exception("There was an API error: ".$decoded["error"]);
         return isset($class) ? json2_decode($decoded["result"], $class, client:$this) : $decoded["result"];
